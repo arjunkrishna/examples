@@ -11,6 +11,7 @@ from torch.utils.data import DataLoader
 from torchvision import datasets
 from torchvision import transforms
 import torch.onnx
+from platform import system
 
 import utils
 from transformer_net import TransformerNet
@@ -111,10 +112,14 @@ def train(args):
 
     # save model
     transformer.eval().cpu()
-    save_model_filename = "epoch_" + str(args.epochs) + "_" + str(time.ctime()).replace(' ', '_') + "_" + str(
-        args.content_weight) + "_" + str(args.style_weight) + ".model"
-    #save_model_path = os.path.join(args.save_model_dir, save_model_filename)
-    save_model_path = os.path.join(args.save_model_dir, ‘last-model.model’)
+    
+    if (system() == 'Windows')
+        save_model_filename = "epoch_" + str(args.epochs) + "_" + str(time.ctime()).replace(' ', '_').replace(':','_') + "_" + str(args.content_weight) + "_" + str(args.style_weight) + ".model"
+    else
+        save_model_filename = "epoch_" + str(args.epochs) + "_" + str(time.ctime()).replace(' ', '_') + "_" + str(args.content_weight) + "_" + str(args.style_weight) + ".model"
+
+    save_model_path = os.path.join(args.save_model_dir, save_model_filename)
+    #save_model_path = os.path.join(args.save_model_dir, 'last-model.model')
     torch.save(transformer.state_dict(), save_model_path)
 
     print("\nDone, trained model saved at", save_model_path)
