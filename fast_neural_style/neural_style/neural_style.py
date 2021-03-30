@@ -112,10 +112,10 @@ def train(args):
 
     # save model
     transformer.eval().cpu()
-    
-    if (system() == 'Windows')
+
+    if (system() == 'Windows'):
         save_model_filename = "epoch_" + str(args.epochs) + "_" + str(time.ctime()).replace(' ', '_').replace(':','_') + "_" + str(args.content_weight) + "_" + str(args.style_weight) + ".model"
-    else
+    else:
         save_model_filename = "epoch_" + str(args.epochs) + "_" + str(time.ctime()).replace(' ', '_') + "_" + str(args.content_weight) + "_" + str(args.style_weight) + ".model"
 
     save_model_path = os.path.join(args.save_model_dir, save_model_filename)
